@@ -9,17 +9,31 @@ import android.view.View;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     private GestureDetectorCompat gestureObject;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button addButton = (Button)findViewById(R.id.addButton);
+
         gestureObject = new GestureDetectorCompat(this, new SwipeGesture());
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                android.support.v4.app.FragmentManager fragie = getSupportFragmentManager();
+                fragie.beginTransaction().replace(R.id.frag1,new ReducedInfoFragment()).commit();
+            }
+        });
+
     }
 
     @Override
