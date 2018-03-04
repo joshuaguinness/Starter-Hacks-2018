@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFA889</color>
-    <color name="colorPrimaryDark">#FF8558</color>
-    <color name="colorAccent">#FFA889</color>
     <color name="lgtGreen">#6FCF97</color>
 </resources>
