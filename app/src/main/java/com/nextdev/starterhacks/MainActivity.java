@@ -11,6 +11,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private GestureDetectorCompat gestureObject;
@@ -20,6 +22,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        fileIO io = new fileIO();
+        ArrayList<location> locList = io.readIn();
+
+        // SORTING TO BE ENABLED ONCE GOOGLE MAPS API
+        // sortLocations sLoc = new sortLocations();
+        // locList = sort(sLoc);
+
+        location[] top4 = new location[4];
+
+        for(int i = 0; i < 4; i ++) {
+            top4[i] = locList.get(i);
+        }
+
 
         Button addButton = (Button)findViewById(R.id.addButton);
 
