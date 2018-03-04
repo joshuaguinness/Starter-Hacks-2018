@@ -27,6 +27,21 @@ public class sortLocations {
     // This function is where the main google maps implimentation must be done:
     private double getDistance(location L) {
         return 5.2;
+
+
+
+
     }
 
+    private double haversine(double lon1, double lat1, double lon2, double lat2) {
+        int R = 6371;
+        double phi1 = Math.toRadians(lat1);
+        double phi2 = Math.toRadians(lat2);
+        double deltaPhi = Math.toRadians(lat2 - lat1);
+        double deltaLambda = Math.toRadians(lon2 - lon1);
+
+        double a = Math.sin(deltaPhi/2) * Math.sin(deltaPhi/2) + Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaLambda / 2) * Math.sin(deltaLambda / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c;
+    }
 }
