@@ -36,28 +36,11 @@ public class MainActivity extends AppCompatActivity {
         //    top4[i] = locList.get(i);
         //}
 
-
-        Button addButton = (Button) findViewById(R.id.addButton);
-
         FragmentManager frag = getSupportFragmentManager();
         frag.beginTransaction().replace(R.id.frag1, new ReducedInfoFragment()).commit();
         frag.beginTransaction().replace(R.id.frag2, new ReducedInfoFragment()).commit();
         frag.beginTransaction().replace(R.id.frag3, new ReducedInfoFragment()).commit();
         frag.beginTransaction().replace(R.id.frag4, new ReducedInfoFragment()).commit();
-
-        /*
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                android.support.v4.app.FragmentManager frag = getSupportFragmentManager();
-                frag.beginTransaction().replace(R.id.frag1,new ReducedInfoFragment()).commit();
-                frag.beginTransaction().replace(R.id.frag2,new ReducedInfoFragment()).commit();
-                frag.beginTransaction().replace(R.id.frag3,new ReducedInfoFragment()).commit();
-                frag.beginTransaction().replace(R.id.frag4,new ReducedInfoFragment()).commit();
-            }
-        });
-        */
 
     }
 
@@ -87,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this, aboutActivity.class);
                 finish();
                 startActivity(intent);
+            } else {
+                Intent intent = new Intent(
+                        MainActivity.this, profileActivity.class);
+                finish();
+                startActivity(intent);
             }
             return true;
         }
@@ -94,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
     // Called when the user taps the send button
     public void goToInfo(View view) {
         Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
+    }
+
+    // Called when the add button is pressed
+    public void goToAdd(View view) {
+        Intent intent = new Intent(this, addActivity.class);
         startActivity(intent);
     }
 }

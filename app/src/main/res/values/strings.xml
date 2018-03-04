@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Scavenger</string>
-    <string name="main_title">Scavenge Nearby</string>
-    <string name="about_us">About Us</string>
+    <string name="about_us">About Us \t\t\t\t\t</string>
     <string name="about_us_body">This is filler text for the body. I don\'t know what to put here</string>
     <string name="button_text">+</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>

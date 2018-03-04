@@ -14,11 +14,14 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".aboutActivity"></activity>
-        <activity android:name=".InfoActivity"></activity>
+        <activity android:name=".aboutActivity" />
+        <activity android:name=".InfoActivity" />
+        <activity android:name=".addActivity" />
+        <activity android:name=".profileActivity"></activity>
     </application>
 
 </manifest>

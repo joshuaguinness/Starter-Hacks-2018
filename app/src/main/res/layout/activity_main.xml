@@ -23,19 +23,31 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="90dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/baseGreen"
+            android:gravity="center"
             android:text="@string/app_name"
-            android:textAlignment="textEnd"
+            android:textAlignment="center"
             android:textColor="@color/lgtGreen"
-            android:textSize="36sp"
+            android:textSize="48dp"
             android:typeface="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="6dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:background="@android:drawable/divider_horizontal_bright"
+            android:cropToPadding="true"
+            android:scaleType="fitXY"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
@@ -44,6 +56,15 @@
             android:layout_weight="2"
             android:orientation="horizontal"
             android:weightSum="2">
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/rounded_square"
+                android:onClick="goToInfo"
+                android:text="Select" />
 
             <fragment
                 android:id="@+id/frag1"
@@ -54,14 +75,6 @@
                 tools:layout_editor_absoluteX="30dp"
                 tools:layout_editor_absoluteY="99dp" />
 
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:backgroundTint="@color/lgtGreen"
-                android:onClick="goToInfo"
-                android:text="Select" />
         </LinearLayout>
 
         <LinearLayout
@@ -70,6 +83,15 @@
             android:layout_weight="2"
             android:orientation="horizontal"
             android:weightSum="2">
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/rounded_square"
+                android:onClick="goToInfo"
+                android:text="Select" />
 
             <fragment
                 android:id="@+id/frag2"
@@ -80,14 +102,6 @@
                 tools:layout_editor_absoluteX="59dp"
                 tools:layout_editor_absoluteY="272dp" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:backgroundTint="@color/lgtGreen"
-                android:onClick="goToInfo"
-                android:text="Select" />
         </LinearLayout>
 
         <LinearLayout
@@ -96,6 +110,15 @@
             android:layout_weight="2"
             android:orientation="horizontal"
             android:weightSum="2">
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/rounded_square"
+                android:onClick="goToInfo"
+                android:text="Select" />
 
             <fragment
                 android:id="@+id/frag3"
@@ -104,14 +127,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:backgroundTint="@color/lgtGreen"
-                android:onClick="goToInfo"
-                android:text="Select" />
         </LinearLayout>
 
         <LinearLayout
@@ -121,6 +136,15 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/rounded_square"
+                android:onClick="goToInfo"
+                android:text="Select" />
+
             <fragment
                 android:id="@+id/frag4"
                 android:name="android.webkit.WebViewFragment"
@@ -128,14 +152,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5" />
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:backgroundTint="@color/lgtGreen"
-                android:onClick="goToInfo"
-                android:text="Select" />
         </LinearLayout>
 
     </LinearLayout>
@@ -148,6 +164,7 @@
         android:layout_marginEnd="16dp"
         android:layout_weight="2"
         android:background="@drawable/shadow_button"
+        android:onClick="goToAdd"
         android:text="@string/button_text"
         android:textAlignment="center"
         android:textColor="@android:color/white"
