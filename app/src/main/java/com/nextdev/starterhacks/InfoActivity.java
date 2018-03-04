@@ -13,17 +13,22 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class InfoActivity extends AppCompatActivity implements OnMapReadyCallback {
+    //public String lat; public String lon;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
+        //lat = intent.getStringExtra(MainActivity.LAT);
+        //lon = intent.getStringExtra(MainActivity.LON);
         
         // Imported Vars
-        String address = bundle.getString("ADDRESS");
-        int hazard = bundle.getInt("HAZARD");
-        String description = bundle.getString("DESCRIPTION");
-        double distance = bundle.getDouble("DISTANCE");
+        //String address = bundle.getString("ADDRESS");
+        //int hazard = bundle.getInt("HAZARD");
+        //String description = bundle.getString("DESCRIPTION");
+        //double distance = bundle.getDouble("DISTANCE");
+        double lat = bundle.getDouble("LAT");
+        double lon = bundle.getDouble("LON");
         
         super.onCreate(savedInstanceState);
         // Retrieve the content view that renders the map
@@ -35,11 +40,10 @@ public class InfoActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
     }
 
-    @Override
     public void onMapReady(GoogleMap googleMap) {
         //Add a marker in Sydney, Australia, and move the map's camera to the same location
-        LatLng sydney = new LatLng(-33.852, 151.211);
-        googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng place = new LatLng(-33.852, 151.211);
+        googleMap.addMarker(new MarkerOptions().position(place).title("Your Clicked Location"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(place));
     }
 }

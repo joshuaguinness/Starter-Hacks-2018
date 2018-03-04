@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.nextdev.starterhacks.InfoActivity">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="187dp"
-        android:layout_height="30dp"
-        android:text="@string/infoString"
-        android:textAlignment="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="7dp" />
-
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"

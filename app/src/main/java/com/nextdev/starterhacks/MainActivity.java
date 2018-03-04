@@ -1,7 +1,6 @@
 package com.nextdev.starterhacks;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -17,7 +16,6 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -25,16 +23,13 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener {
-    
+
+    //public static final String LAT = "com.example.myfirstapp.LAT";
+    //public static final String LON = "com.example.myfirstapp.LON";
+
     private GoogleApiClient mGoogleApiClient;
     final int PERMISSION_LOCATION = 111;
     private GestureDetectorCompat gestureObject;
@@ -59,9 +54,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         loc.add(new location("1665 University Ave", 0, "some cardboard"));
         loc.add(new location("20908 Ring Road", 1,"some rusty tin cans"));
         loc.add(new location("295 Hagey Blvd", 1, "car bumper"));
-        // SORTING TO BE ENABLED ONCE GOOGLE MAPS API
-        // sortLocations sLoc = new sortLocations();
-        // locList = sort(sLoc);
+
+        loc.get(0).lat=43.469359;
+        loc.get(0).lon=-80.550713;
+        loc.get(1).lat=43.470231;
+        loc.get(1).lon=-80.53811;
 
         FragmentManager frag = getSupportFragmentManager();
         frag.beginTransaction().replace(R.id.frag1, new ReducedInfoFragment()).commit();
@@ -114,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         intent.putExtra("HAZARD", loc.get(num).haz);
         intent.putExtra("DESCRIPTION", loc.get(num).desc);
         intent.putExtra("DISTANCE", loc.get(num).dist);
+        intent.putExtra("LON", loc.get(num).lon);
+        intent.putExtra("LAT", loc.get(num).lat);
 
         startActivity(intent);
     }
