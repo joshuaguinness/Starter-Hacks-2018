@@ -14,4 +14,5 @@ public class location {
         haz = hazard;
         desc = description;
     }
+    //blah
 }
