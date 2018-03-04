@@ -33,37 +33,102 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <fragment
-            android:id="@+id/frag1"
-            android:name="android.webkit.WebViewFragment"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="2"
-            tools:layout_editor_absoluteX="30dp"
-            tools:layout_editor_absoluteY="99dp" />
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-        <fragment
-            android:id="@+id/frag2"
-            android:name="android.webkit.WebViewFragment"
+            <fragment
+                android:id="@+id/frag1"
+                android:name="android.webkit.WebViewFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                tools:layout_editor_absoluteX="30dp"
+                tools:layout_editor_absoluteY="99dp" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:onClick="goToInfo"
+                android:text="Select" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="2"
-            tools:layout_editor_absoluteX="59dp"
-            tools:layout_editor_absoluteY="272dp" />
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-        <fragment
-            android:id="@+id/frag3"
-            android:name="android.webkit.WebViewFragment"
+            <fragment
+                android:id="@+id/frag2"
+                android:name="android.webkit.WebViewFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                tools:layout_editor_absoluteX="59dp"
+                tools:layout_editor_absoluteY="272dp" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:onClick="goToInfo"
+                android:text="Select" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-        <fragment
-            android:id="@+id/frag4"
-            android:name="android.webkit.WebViewFragment"
+            <fragment
+                android:id="@+id/frag3"
+                android:name="android.webkit.WebViewFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:onClick="goToInfo"
+                android:text="Select" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <fragment
+                android:id="@+id/frag4"
+                android:name="android.webkit.WebViewFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:onClick="goToInfo"
+                android:text="Select" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <Button

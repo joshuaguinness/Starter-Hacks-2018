@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button addButton = (Button)findViewById(R.id.addButton);
 
+
         gestureObject = new GestureDetectorCompat(this, new SwipeGesture());
 
         android.support.v4.app.FragmentManager frag = getSupportFragmentManager();
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         frag.beginTransaction().replace(R.id.frag2,new ReducedInfoFragment()).commit();
         frag.beginTransaction().replace(R.id.frag3,new ReducedInfoFragment()).commit();
         frag.beginTransaction().replace(R.id.frag4,new ReducedInfoFragment()).commit();
+
         /*
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,10 +54,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
-    public void addMessage (View view) {
-        /* this is to activate the add fragment */
-    }
-
     class SwipeGesture extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
@@ -68,5 +66,10 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         }
+    }
+    // Called when the user taps the send button
+    public void goToInfo(View view) {
+        Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
     }
 }
