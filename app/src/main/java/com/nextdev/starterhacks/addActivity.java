@@ -1,7 +1,9 @@
 package com.nextdev.starterhacks;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class addActivity extends AppCompatActivity {
 
@@ -9,5 +11,11 @@ public class addActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+    }
+
+    public void submit(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
     }
 }

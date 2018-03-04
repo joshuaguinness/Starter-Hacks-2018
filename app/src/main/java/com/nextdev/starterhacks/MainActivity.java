@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             return true;
         }
     }
-    /
     // Called when the user taps the send button
     public void goToInfo(View view) {
         Intent intent = new Intent(this, InfoActivity.class);
