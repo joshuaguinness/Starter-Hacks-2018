@@ -34,7 +34,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener {
-
+    
     private GoogleApiClient mGoogleApiClient;
     final int PERMISSION_LOCATION = 111;
     private GestureDetectorCompat gestureObject;
@@ -52,10 +52,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         createShortcut();
 
-        //writeOut("StarterHacks2018.txt");
-        //readIn("StarterHacks2018.txt");
-
         gestureObject = new GestureDetectorCompat(this, new SwipeGesture());
+        
+        loc.add(new location("371 Columbia Dr", 2,"Broken glass"));
+        loc.add(new location("290 Westmount Rd N", 0, "lots of beer cans"));
+        loc.add(new location("1665 University Ave", 0, "some cardboard"));
+        loc.add(new location("20908 Ring Road", 1,"some rusty tin cans"));
+        loc.add(new location("295 Hagey Blvd", 1, "car bumper"));
         // SORTING TO BE ENABLED ONCE GOOGLE MAPS API
         // sortLocations sLoc = new sortLocations();
         // locList = sort(sLoc);
@@ -85,63 +88,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         return super.onTouchEvent(event);
     }
 
-    public void readIn(String fileName) {
-        Log.d("fileIO", "entered");
-        String ret = "";
-        try {
-            FileInputStream inputStream = openFileInput(fileName);
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ((receiveString = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(receiveString);
-                }
-                inputStream.close();
-                ret = stringBuilder.toString();
-            }
-        } catch (Exception e) {
-            Log.d("fileIO", e.getMessage());
-        }
-        Log.d("fileIO", "read from file: " + ret);
-        String[] items = ret.split("##");
-        for (int i = 0; i < items.length; i++) {
-            String[] parts = items[i].split(",");
-            location L = new location(parts[0], Integer.parseInt(parts[1]), parts[2], 1000);
-            loc.add(L);
-        }
-        return;
-    }
-
-    public void writeOut(String fileName) {
-        String s = "";
-        for(int i = 0; i < loc.size(); i++) {
-            s += loc.get(i).addr + "," + loc.get(i).haz + "," + loc.get(i).desc + "##";
-        }
-        writeOutHelp(s, fileName);
-    }
-
-    public location sendLoc(int id) {
-        try {
-            return loc.get(id - 1);
-        } catch (Exception e){
-            Log.e("fileIO","index most likely out of bounds");
-        }
-        return null;
-    }
-
-    public void writeOutHelp(String s, String fileName) {
-        try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput(fileName, Context.MODE_PRIVATE));
-            outputStreamWriter.write(s);
-            outputStreamWriter.close();
-        } catch (IOException e) {
-            Log.e("FileIO", "File write failed: " + e.toString());
-        }
-    }
-
     class SwipeGesture extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
@@ -160,11 +106,30 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             return true;
         }
     }
+    /
     // Called when the user taps the send button
     public void goToInfo(View view) {
         Intent intent = new Intent(this, InfoActivity.class);
-        //intent.putExtra(EXTRA_MESSAGE, address)
+        int num = buttonToInt(view);
+        intent.putExtra("ADDRESS", loc.get(num).addr);
+        intent.putExtra("HAZARD", loc.get(num).haz);
+        intent.putExtra("DESCRIPTION", loc.get(num).desc);
+        intent.putExtra("DISTANCE", loc.get(num).dist);
+
         startActivity(intent);
+    }
+
+    private int buttonToInt(View view) {
+        switch(view.getId()) {
+            case R.id.button1:
+                return 0;
+            case R.id.button2:
+                return 1;
+            case R.id.button3:
+                return 2;
+            default:
+                return 3;
+        }
     }
 
     // Called when the add button is pressed
