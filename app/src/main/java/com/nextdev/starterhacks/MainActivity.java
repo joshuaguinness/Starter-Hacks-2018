@@ -25,15 +25,24 @@ public class MainActivity extends AppCompatActivity {
 
         gestureObject = new GestureDetectorCompat(this, new SwipeGesture());
 
+        android.support.v4.app.FragmentManager frag = getSupportFragmentManager();
+        frag.beginTransaction().replace(R.id.frag1,new ReducedInfoFragment()).commit();
+        frag.beginTransaction().replace(R.id.frag2,new ReducedInfoFragment()).commit();
+        frag.beginTransaction().replace(R.id.frag3,new ReducedInfoFragment()).commit();
+        frag.beginTransaction().replace(R.id.frag4,new ReducedInfoFragment()).commit();
+        /*
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                android.support.v4.app.FragmentManager fragie = getSupportFragmentManager();
-                fragie.beginTransaction().replace(R.id.frag1,new ReducedInfoFragment()).commit();
-                fragie.beginTransaction().replace(R.id.frag2,new ReducedInfoFragment()).commit();
+                android.support.v4.app.FragmentManager frag = getSupportFragmentManager();
+                frag.beginTransaction().replace(R.id.frag1,new ReducedInfoFragment()).commit();
+                frag.beginTransaction().replace(R.id.frag2,new ReducedInfoFragment()).commit();
+                frag.beginTransaction().replace(R.id.frag3,new ReducedInfoFragment()).commit();
+                frag.beginTransaction().replace(R.id.frag4,new ReducedInfoFragment()).commit();
             }
         });
+        */
 
     }
 
