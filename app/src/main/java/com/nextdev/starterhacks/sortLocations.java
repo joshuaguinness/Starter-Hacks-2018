@@ -26,7 +26,7 @@ public class sortLocations {
 
     // This function is where the main google maps implimentation must be done:
     private double getDistance(location L) {
-        return 5.2;
+        return 6;
 
 
 
