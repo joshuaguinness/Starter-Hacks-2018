@@ -1,62 +1,46 @@
 package com.nextdev.starterhacks;
 
-import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener {
-
-    private GoogleApiClient mGoogleApiClient;
-    final int PERMISSION_LOCATION = 111;
+public class MainActivity extends AppCompatActivity {
 
     private GestureDetectorCompat gestureObject;
-
+    public ArrayList<location> loc = new ArrayList<location>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        loc.add(new location("35 Idleswift Dr",2,"dangerous"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addConnectionCallbacks(this)
-                .addApi(LocationServices.API)
-                .build();
-
         createShortcut();
         fileIO io = new fileIO();
-        ArrayList<location> locList = io.readIn();
+        writeOut("StarterHacks2018.txt");
+        readIn("StarterHacks2018.txt");
+
 
         gestureObject = new GestureDetectorCompat(this, new SwipeGesture());
         // SORTING TO BE ENABLED ONCE GOOGLE MAPS API
         // sortLocations sLoc = new sortLocations();
         // locList = sort(sLoc);
-
-        location[] top4 = new location[4];
-
-        //for (int i = 0; i < 4; i++) {
-        //    top4[i] = locList.get(i);
-        //}
 
         FragmentManager frag = getSupportFragmentManager();
         frag.beginTransaction().replace(R.id.frag1, new ReducedInfoFragment()).commit();
@@ -81,6 +65,62 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public boolean onTouchEvent(MotionEvent event) {
         this.gestureObject.onTouchEvent(event);
         return super.onTouchEvent(event);
+    }
+
+    public void readIn(String fileName) {
+        Log.d("fileIO", "entered");
+        String ret = "";
+        try {
+            FileInputStream inputStream = openFileInput(fileName);
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                }
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        } catch (Exception e) {
+            Log.d("fileIO", e.getMessage());
+        }
+        Log.d("fileIO", "read from file: " + ret);
+        String[] items = ret.split("##");
+        for (int i = 0; i < items.length; i++) {
+            String[] parts = items[i].split(",");
+            location L = new location(parts[0], Integer.parseInt(parts[1]), parts[2], 1000);
+            loc.add(L);
+        }
+        return;
+    }
+
+    public void writeOut(String fileName) {
+        String s = "";
+        for(int i = 0; i < loc.size(); i++) {
+            s += loc.get(i).addr + "," + loc.get(i).haz + "," + loc.get(i).desc + "##";
+        }
+        writeOutHelp(s, fileName);
+    }
+
+    public location sendLoc(int id) {
+        try {
+            return loc.get(id - 1);
+        } catch (Exception e){
+            Log.e("fileIO","index most likely out of bounds");
+        }
+    }
+
+    public void writeOutHelp(String s, String fileName) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput(fileName, Context.MODE_PRIVATE));
+            outputStreamWriter.write(s);
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.e("FileIO", "File write failed: " + e.toString());
+        }
     }
 
     class SwipeGesture extends GestureDetector.SimpleOnGestureListener {
@@ -111,78 +151,5 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public void goToAdd(View view) {
         Intent intent = new Intent(this, addActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_LOCATION);
-            Log.v("DONKEY", "Requesting Permissions");
-        } else {
-            Log.v("Donkey", "starting location services from onConnected");
-            startLocationServices();
-        }
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
-
-        Log.v("donkey", "Lat:" + latitude + " - Long:" + longitude);
-    }
-
-    @Override
-    protected void onStart() {
-        mGoogleApiClient.connect();
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        mGoogleApiClient.disconnect();
-        super.onStop();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode) {
-            case PERMISSION_LOCATION: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startLocationServices();
-                    Log.v("DONKEY", "Permission Granted - Starting Services");
-                } else {
-                    //Show a dialog saying something like "I can't see your location"
-                    Log.v("DONKEY", "Permission not granted");
-                }
-            }
-        }
-    }
-
-    public void startLocationServices() {
-        Log.v("DONKEY", "starting location services called");
-
-        try {
-            LocationRequest req = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, req, this);
-            Log.v("DONKEY", "Requestion Location Updates");
-        } catch (SecurityException exception) {
-            //Should dialog to user
-            Log.v("DONKEY", exception.toString());
-        }
-
-
     }
 }
