@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
- * FileIO contains input and output functions for an arraylist of location objects
+ * FileIO contains input and output functions for an Arraylist of location objects
  */
 
 public class fileIO {
