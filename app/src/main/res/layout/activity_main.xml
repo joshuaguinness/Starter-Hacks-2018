@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:weightSum="12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +37,7 @@
             android:id="@+id/frag1"
             android:name="android.webkit.WebViewFragment"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="40dp"
             android:layout_weight="2"
             tools:layout_editor_absoluteX="30dp"
             tools:layout_editor_absoluteY="99dp" />
@@ -45,33 +46,33 @@
             android:id="@+id/frag2"
             android:name="android.webkit.WebViewFragment"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="40dp"
             android:layout_weight="2"
             tools:layout_editor_absoluteX="59dp"
             tools:layout_editor_absoluteY="272dp" />
 
         <fragment
-            android:id="@+id/fragment4"
+            android:id="@+id/frag3"
             android:name="android.webkit.WebViewFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/addButton"
-            android:layout_width="match_parent"
-            android:layout_height="69dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_weight="2"
-            android:background="@drawable/round_button"
-            android:text="@string/button_text"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            android:layout_height="40dp"
+            android:layout_weight="2" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="2"
+        android:background="@drawable/round_button"
+        android:text="@string/button_text"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
