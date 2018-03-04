@@ -1,21 +1,30 @@
 package com.nextdev.starterhacks;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private GestureDetectorCompat gestureObject;
-
+    public ArrayList<location> loc = new ArrayList<location>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,18 +32,14 @@ public class MainActivity extends AppCompatActivity {
 
         createShortcut();
         fileIO io = new fileIO();
-        ArrayList<location> locList = io.readIn();
+        writeOut("StarterHacks2018.txt");
+        readIn("StarterHacks2018.txt");
+
 
         gestureObject = new GestureDetectorCompat(this, new SwipeGesture());
         // SORTING TO BE ENABLED ONCE GOOGLE MAPS API
         // sortLocations sLoc = new sortLocations();
         // locList = sort(sLoc);
-
-        location[] top4 = new location[4];
-
-        //for (int i = 0; i < 4; i++) {
-        //    top4[i] = locList.get(i);
-        //}
 
         FragmentManager frag = getSupportFragmentManager();
         frag.beginTransaction().replace(R.id.frag1, new ReducedInfoFragment()).commit();
@@ -59,6 +64,63 @@ public class MainActivity extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent event) {
         this.gestureObject.onTouchEvent(event);
         return super.onTouchEvent(event);
+    }
+
+    public void readIn(String fileName) {
+        Log.d("fileIO", "entered");
+        String ret = "";
+        try {
+            FileInputStream inputStream = openFileInput(fileName);
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                }
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        } catch (Exception e) {
+            Log.d("fileIO", e.getMessage());
+        }
+        Log.d("fileIO", "read from file: " + ret);
+        String[] items = ret.split("##");
+        for (int i = 0; i < items.length; i++) {
+            String[] parts = items[i].split(",");
+            location L = new location(parts[0], Integer.parseInt(parts[1]), parts[2], 1000);
+            loc.add(L);
+        }
+        return;
+    }
+
+    public void writeOut(String fileName) {
+        String s = "";
+        for(int i = 0; i < loc.size(); i++) {
+            s += loc.get(i).addr + "," + loc.get(i).haz + "," + loc.get(i).desc + "##";
+        }
+        writeOutHelp(s, fileName);
+    }
+
+    public location sendLoc(int id) {
+        try {
+            return loc.get(id - 1);
+        } catch (Exception e){
+            Log.e("fileIO","index most likely out of bounds");
+        }
+        return null;
+    }
+
+    public void writeOutHelp(String s, String fileName) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput(fileName, Context.MODE_PRIVATE));
+            outputStreamWriter.write(s);
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.e("FileIO", "File write failed: " + e.toString());
+        }
     }
 
     class SwipeGesture extends GestureDetector.SimpleOnGestureListener {
