@@ -7,6 +7,8 @@
     tools:context="com.nextdev.starterhacks.MainActivity">
 
     <Button
+        android:id="@+id/addButton_id"
+        android:onClick="onClickAddBtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="345dp"
