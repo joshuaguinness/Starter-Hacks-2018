@@ -10,6 +10,8 @@ public class location {
     public int haz = 0;
     public String desc = "";
     public double dist = 1000;
+    public double lat = 0;
+    public double lon = 0;
 
     public location(String address, int hazard, String description) {
         addr = address;
@@ -22,5 +24,11 @@ public class location {
         haz = hazard;
         desc = description;
         dist = distance;
+    }
+
+    // new object call type for just coord purposes
+    public location(double latitude, double longitude) {
+        lat = latitude;
+        lon = longitude;
     }
 }
