@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<location> loc = new ArrayList<location>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        loc.add(new location("35 Idleswift Dr",2,"dangerous"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -111,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e){
             Log.e("fileIO","index most likely out of bounds");
         }
+        return null;
     }
 
     public void writeOutHelp(String s, String fileName) {
