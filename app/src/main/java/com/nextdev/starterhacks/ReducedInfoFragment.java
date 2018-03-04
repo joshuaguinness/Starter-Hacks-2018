@@ -25,6 +25,7 @@ public class ReducedInfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_reduced_info, container, false);
         return view;
     }

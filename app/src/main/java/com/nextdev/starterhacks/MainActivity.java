@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
                 android.support.v4.app.FragmentManager fragie = getSupportFragmentManager();
                 fragie.beginTransaction().replace(R.id.frag1,new ReducedInfoFragment()).commit();
+                fragie.beginTransaction().replace(R.id.frag2,new ReducedInfoFragment()).commit();
             }
         });
 
