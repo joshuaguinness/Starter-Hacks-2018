@@ -16,6 +16,15 @@ public class InfoActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        Bundle bundle = getIntent().getExtras();
+        
+        // Imported Vars
+        String address = bundle.getString("ADDRESS");
+        int hazard = bundle.getInt("HAZARD");
+        String description = bundle.getString("DESCRIPTION");
+        double distance = bundle.getDouble("DISTANCE");
+        
         super.onCreate(savedInstanceState);
         // Retrieve the content view that renders the map
         setContentView(R.layout.activity_info);
@@ -24,8 +33,6 @@ public class InfoActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        //Get the Intent that started this activity
-        Intent intent = getIntent();
     }
 
     @Override
