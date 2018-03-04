@@ -31,10 +31,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         createShortcut();
-        fileIO io = new fileIO();
-        writeOut("StarterHacks2018.txt");
-        readIn("StarterHacks2018.txt");
 
+        //writeOut("StarterHacks2018.txt");
+        //readIn("StarterHacks2018.txt");
 
         gestureObject = new GestureDetectorCompat(this, new SwipeGesture());
         // SORTING TO BE ENABLED ONCE GOOGLE MAPS API

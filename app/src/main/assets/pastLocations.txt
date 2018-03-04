@@ -1,4 +1,0 @@
-"St. Paul's","1","A few broken bottles"
-"REV West A","0","Some paper cups."
-"DC Library","2","Shredded tin cans"
-"PAC","2","Used needles"
