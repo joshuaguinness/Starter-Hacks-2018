@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 
 public class fileIO {
-    ArrayList<location> readIn() {
+    public ArrayList<location> readIn() {
 
         ArrayList<location> myList = new ArrayList<location>();
 
@@ -39,7 +39,7 @@ public class fileIO {
         }
         return myList;
     }
-    void printOut(ArrayList<location> myList) {
+    public void printOut(ArrayList<location> myList) {
         try {
         File file = new File("pastLocations.txt"); //will overwrite
         FileWriter fw = new FileWriter(file.getAbsoluteFile());

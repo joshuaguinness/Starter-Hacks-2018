@@ -9,11 +9,18 @@ public class location {
     public String addr = "";
     public int haz = 0;
     public String desc = "";
+    public double dist = 1000;
 
     public location(String address, int hazard, String description) {
         addr = address;
         haz = hazard;
         desc = description;
     }
-    //blah
+
+    public location(String address, int hazard, String description, double distance) {
+        addr = address;
+        haz = hazard;
+        desc = description;
+        dist = distance;
+    }
 }
