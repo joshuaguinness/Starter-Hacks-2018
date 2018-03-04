@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
 import android.view.View;
 import android.view.MotionEvent;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity {
 
