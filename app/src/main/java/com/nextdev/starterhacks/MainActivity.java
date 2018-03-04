@@ -2,13 +2,12 @@ package com.nextdev.starterhacks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
-import android.view.View;
 import android.view.MotionEvent;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -17,37 +16,34 @@ public class MainActivity extends AppCompatActivity {
 
     private GestureDetectorCompat gestureObject;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        createShortcut();
         fileIO io = new fileIO();
         ArrayList<location> locList = io.readIn();
 
+        gestureObject = new GestureDetectorCompat(this, new SwipeGesture());
         // SORTING TO BE ENABLED ONCE GOOGLE MAPS API
         // sortLocations sLoc = new sortLocations();
         // locList = sort(sLoc);
 
         location[] top4 = new location[4];
 
-        for(int i = 0; i < 4; i ++) {
-            top4[i] = locList.get(i);
-        }
+        //for (int i = 0; i < 4; i++) {
+        //    top4[i] = locList.get(i);
+        //}
 
 
-        Button addButton = (Button)findViewById(R.id.addButton);
+        Button addButton = (Button) findViewById(R.id.addButton);
 
-
-        gestureObject = new GestureDetectorCompat(this, new SwipeGesture());
-
-        android.support.v4.app.FragmentManager frag = getSupportFragmentManager();
-        frag.beginTransaction().replace(R.id.frag1,new ReducedInfoFragment()).commit();
-        frag.beginTransaction().replace(R.id.frag2,new ReducedInfoFragment()).commit();
-        frag.beginTransaction().replace(R.id.frag3,new ReducedInfoFragment()).commit();
-        frag.beginTransaction().replace(R.id.frag4,new ReducedInfoFragment()).commit();
+        FragmentManager frag = getSupportFragmentManager();
+        frag.beginTransaction().replace(R.id.frag1, new ReducedInfoFragment()).commit();
+        frag.beginTransaction().replace(R.id.frag2, new ReducedInfoFragment()).commit();
+        frag.beginTransaction().replace(R.id.frag3, new ReducedInfoFragment()).commit();
+        frag.beginTransaction().replace(R.id.frag4, new ReducedInfoFragment()).commit();
 
         /*
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +59,17 @@ public class MainActivity extends AppCompatActivity {
         });
         */
 
+    }
+
+    private void createShortcut(){
+        Intent shortcutIntent = new Intent(getApplicationContext(),MainActivity.class);
+        shortcutIntent.setAction(Intent.ACTION_MAIN);
+        Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, R.string.app_name);
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,Intent.ShortcutIconResource.fromContext(getApplicationContext(), R.drawable.ic_launcher_foreground));
+        intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        getApplicationContext().sendBroadcast(intent);
     }
 
     @Override
