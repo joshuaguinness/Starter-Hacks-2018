@@ -2,8 +2,23 @@
 <resources>
     <string name="app_name">Scavenger</string>
     <string name="about_us">About Us \t\t\t\t\t</string>
-    <string name="about_us_body">This is filler text for the body. I don\'t know what to put here</string>
+    <string name="about_us_body">Scavenger is an app that connects sustainability and lifestyle oriented
+        community members together. Users can either upload, edit, or delete project submissions of waste
+        sites in need of clean up, near them. They can choose to add a description of the location/
+        materials, tag bottle refund programs as well as Personal Protective Equipment that may be needed.
+        Users are incentivized to be more physically active, clean up their community and increase the
+        market value of residential properties as they scavenge for reusable materials, earn points for
+        each completed waste project, and redeem coupons for local businesses. Scavengers can also choose
+        to make extra money by refunding certain materials to recycling depots (ex. alcohol bottles at
+        The Beer Store) </string>
     <string name="button_text">+</string>
+    <string name="user">Anonymous Raccoon</string>
+    <string name="score">Activity Score:</string>
+    <string name="score_value">14560</string>
+    <string name="first">\t\t 1. Anonymous Turtle\t-\t43240</string>
+    <string name="second">\t\t 2. Anonymous Rabbit\t-\t32339</string>
+    <string name="third">\t\t 3. Anonymous Raccoon\t-\t14560</string>
+    <string name="joinDate">Joined: Mar 3, 2018</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="infoString">This is the info activity</string>
     <string name="select">Select</string>
